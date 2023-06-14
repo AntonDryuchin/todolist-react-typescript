@@ -6,7 +6,6 @@ import Task from "../../atoms/Task/Task";
 
 export default function List() {
   const tasks = useAppSelector((state: RootState) => state.tasksSlice.tasks);
-  console.log("tasks:", tasks);
 
   return (
     <div className="list">

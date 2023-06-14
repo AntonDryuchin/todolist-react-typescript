@@ -3,6 +3,7 @@ import { ITask } from "../../../redux/types";
 import { useAppDispatch } from "../../../redux/hooks";
 import { delTask, editTask } from "../../../redux/tasks.slice";
 import AddTaskForm from "../AddTaskForm/AddTaskForm";
+import "./Task.css";
 
 export default function Task({ id, text, isDone }: ITask) {
   const dispatch = useAppDispatch();
@@ -26,6 +27,12 @@ export default function Task({ id, text, isDone }: ITask) {
     <div className="task">
       {editFlag ? (
         <>
+          <input
+            className="taskCheckbox"
+            type="checkbox"
+            checked={isDone}
+            disabled
+          />
           <AddTaskForm
             type="edit"
             task={{ id, text, isDone }}
@@ -35,16 +42,26 @@ export default function Task({ id, text, isDone }: ITask) {
         </>
       ) : (
         <>
-          <input
-            type="checkbox"
-            checked={isDone}
-            onChange={() => checkHandler()}
-          />
-          <span style={{ textDecoration: isDone ? "line-through" : "" }}>
-            {text}
-          </span>
-          <button onClick={() => setEditFlag(true)}>edit</button>
-          <button onClick={delHandler}>del</button>
+          <div>
+            <input
+              type="checkbox"
+              className="taskCheckbox"
+              checked={isDone}
+              onChange={() => checkHandler()}
+            />
+            <span
+              style={{
+                textDecoration: isDone ? "line-through" : "",
+                color: isDone ? "grey" : "black",
+              }}
+            >
+              {text}
+            </span>
+          </div>
+          <div>
+            <button onClick={() => setEditFlag(true)}>edit</button>
+            <button onClick={delHandler}>del</button>
+          </div>
         </>
       )}
     </div>

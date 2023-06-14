@@ -1,0 +1,23 @@
+.addTaskForm {
+  margin: 10px 0;
+  width: 100%;
+}
+
+.addTaskForm form {
+  display: flex;
+  gap: 10px;
+}
+
+.addTaskForm form > * {
+  align-self: center;
+}
+
+.addTaskInput {
+  height: 22px;
+  width: 250px;
+  font-size: 16px;
+}
+
+.addTaskBtn {
+  height: 26px;
+}

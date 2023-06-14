@@ -1,0 +1,16 @@
+.task {
+  width: 305px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+button {
+  height: 26px;
+}
+
+.taskCheckbox {
+  transform: scale(1.5);
+}
