@@ -1,20 +1,26 @@
-.addTaskForm {
+.addTaskFormDiv {
   margin: 10px 0;
   width: 100%;
 }
 
-.addTaskForm form {
+.addTaskFormDiv form {
   display: flex;
   gap: 10px;
 }
 
-.addTaskForm form > * {
+.addTaskFormDiv form > * {
   align-self: center;
 }
 
 .addTaskInput {
   height: 22px;
-  width: 250px;
+  width: 300px;
+  font-size: 16px;
+}
+
+.editTaskInput {
+  height: 22px;
+  width: 268px;
   font-size: 16px;
 }
 

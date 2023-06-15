@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ITask } from "../../../redux/types";
 import { useAppDispatch } from "../../../redux/hooks";
 import { delTask, editTask } from "../../../redux/tasks.slice";
@@ -9,9 +9,10 @@ export default function Task({ id, text, isDone }: ITask) {
   const dispatch = useAppDispatch();
   const [editFlag, setEditFlag] = useState(false);
   const [inputValue, setInputValue] = useState(text);
+  const taskRef = useRef<HTMLDivElement>(null);
 
   const checkHandler = () => {
-    const checkedTask = {
+    const checkedTask: ITask = {
       id,
       text,
       isDone: !isDone,
@@ -23,8 +24,22 @@ export default function Task({ id, text, isDone }: ITask) {
     dispatch(delTask({ id, text, isDone }));
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (taskRef.current && !taskRef.current.contains(event.target as Node)) {
+        setEditFlag(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="task">
+    <div className="task" ref={taskRef}>
       {editFlag ? (
         <>
           <input
@@ -38,7 +53,7 @@ export default function Task({ id, text, isDone }: ITask) {
             task={{ id, text, isDone }}
             setEditFlag={setEditFlag}
           />
-          <button onClick={() => setEditFlag(false)}>cancel</button>
+          {/* <button onClick={() => setEditFlag(false)}>cancel</button> */}
         </>
       ) : (
         <>
@@ -54,12 +69,14 @@ export default function Task({ id, text, isDone }: ITask) {
                 textDecoration: isDone ? "line-through" : "",
                 color: isDone ? "grey" : "black",
               }}
+              onClick={() => setEditFlag(true)}
+              className="taskSpan"
             >
               {text}
             </span>
           </div>
           <div>
-            <button onClick={() => setEditFlag(true)}>edit</button>
+            {/* <button onClick={() => setEditFlag(true)}>edit</button> */}
             <button onClick={delHandler}>del</button>
           </div>
         </>

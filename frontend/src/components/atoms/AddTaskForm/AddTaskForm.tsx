@@ -1,8 +1,14 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useAppDispatch } from "../../../redux/hooks";
 import { addTask, editTask } from "../../../redux/tasks.slice";
 import { ITask } from "../../../redux/types";
-import "./addTaskForm.css";
+import "./AddTaskForm.css";
 
 type IAddFormProps = {
   type: string;
@@ -49,14 +55,14 @@ export default function AddTaskForm({
   };
 
   return (
-    <div className="addTaskForm">
+    <div className="addTaskFormDiv">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           value={inputValue}
           onChange={handleChange}
           placeholder="Your task here"
-          className="addTaskInput"
+          className={type === "add" ? "addTaskInput" : "editTaskInput"}
         />
         <button type="submit" className="addTaskBtn">
           {type === "add" ? "Add" : "Save"}
