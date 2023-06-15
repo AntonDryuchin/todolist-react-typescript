@@ -8,7 +8,7 @@ import "./AddTaskForm.css";
 type AddFormProps = {
   type: string;
   task: ITask;
-  setEditFlag?: any;
+  setEditFlag?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
 };
 
 export default function AddTaskForm({ type, task, setEditFlag }: AddFormProps) {
@@ -39,7 +39,9 @@ export default function AddTaskForm({ type, task, setEditFlag }: AddFormProps) {
         };
         dispatch(editTask(editedTask));
         setInputValue(task.text);
-        setEditFlag(false);
+        if (setEditFlag) {
+          setEditFlag(false);
+        }
       }
     } else {
       setShowModal(true);
