@@ -65,7 +65,7 @@ export default function AddTaskForm({
           className={type === "add" ? "addTaskInput" : "editTaskInput"}
         />
         <button type="submit" className="addTaskBtn">
-          {type === "add" ? "Add" : "Save"}
+          ✅
         </button>
       </form>
     </div>

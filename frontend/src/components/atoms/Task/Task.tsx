@@ -53,7 +53,6 @@ export default function Task({ id, text, isDone }: ITask) {
             task={{ id, text, isDone }}
             setEditFlag={setEditFlag}
           />
-          {/* <button onClick={() => setEditFlag(false)}>cancel</button> */}
         </>
       ) : (
         <>
@@ -76,8 +75,7 @@ export default function Task({ id, text, isDone }: ITask) {
             </span>
           </div>
           <div>
-            {/* <button onClick={() => setEditFlag(true)}>edit</button> */}
-            <button onClick={delHandler}>del</button>
+            <button onClick={delHandler}>❌</button>
           </div>
         </>
       )}
