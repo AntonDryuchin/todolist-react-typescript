@@ -1,28 +1,20 @@
-import React, {
-  ChangeEvent,
-  FormEvent,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useAppDispatch } from "../../../redux/hooks";
 import { addTask, editTask } from "../../../redux/tasks.slice";
 import { ITask } from "../../../redux/types";
+import Modal from "../Modal/Modal";
 import "./AddTaskForm.css";
 
-type IAddFormProps = {
+type AddFormProps = {
   type: string;
   task: ITask;
   setEditFlag?: any;
 };
 
-export default function AddTaskForm({
-  type,
-  task,
-  setEditFlag,
-}: IAddFormProps) {
+export default function AddTaskForm({ type, task, setEditFlag }: AddFormProps) {
   const dispatch = useAppDispatch();
   const [inputValue, setInputValue] = useState(task.text);
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -50,12 +42,19 @@ export default function AddTaskForm({
         setEditFlag(false);
       }
     } else {
-      alert("Please enter the task");
+      setShowModal(true);
     }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   return (
     <div className="addTaskFormDiv">
+      {showModal && (
+        <Modal message="Please enter the task" onClose={closeModal} />
+      )}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
